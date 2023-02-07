@@ -53,9 +53,9 @@ export const getStaticProps: GetStaticProps = async context => {
     if (!id) {
       throw new Error();
     }
-    // const response: ProductItemListType = await projectService.getProject(+id);
+    const response: ProductItemListType = await projectService.getProject(+id);
     return {
-      props: {},
+      props: { ...response },
       revalidate: 200,
     };
   } catch (err) {
