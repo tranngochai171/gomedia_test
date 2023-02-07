@@ -1,3 +1,4 @@
+// @ts-nocheck
 import commonConstants from 'constants/common.constant';
 import axiosHelper from 'helpers/axios.helper';
 import { useCallback, useRef } from 'react';

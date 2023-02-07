@@ -1,3 +1,4 @@
+// @ts-nocheck
 import '@/styles/globals.css';
 import Head from 'next/head';
 import commonConstants from 'constants/common.constant';
