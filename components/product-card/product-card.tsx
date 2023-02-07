@@ -27,7 +27,7 @@ const ProductCard = ({
 }: ProductCardProps) => {
   const router = useRouter();
   const handleLearnMore = () => {
-    router.push('projects/' + id);
+    router.push('projects/' + id, undefined, { scroll: false });
   };
   return (
     <Card sx={{ maxWidth: 345 }}>

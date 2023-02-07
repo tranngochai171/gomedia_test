@@ -72,7 +72,7 @@ const PDFTable = ({ pdfs }: PDFTableProps) => {
         </TableContainer>
       ) : (
         <Typography variant='subtitle1' component='p'>
-          No Invoices Available
+          No Files Available
         </Typography>
       )}
     </Paper>
