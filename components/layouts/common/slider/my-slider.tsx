@@ -51,10 +51,13 @@ export default function RangeSlider({
   const onChangeValue = useDebounceValue(value);
   useEffect(() => {
     onChange(onChangeValue);
-  }, [onChangeValue]);
+  }, [onChange, onChangeValue]);
   const handleChange = (event: Event, newValue: number | number[]) => {
     setValue(newValue as number[]);
   };
+  useEffect(() => {
+    setValue([minValue, maxValue]);
+  }, [minValue, maxValue]);
   return (
     <Box sx={{ minWidth }}>
       <Typography id='input-slider' gutterBottom>
