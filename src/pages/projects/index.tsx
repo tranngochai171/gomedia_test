@@ -1,6 +1,6 @@
 import { ReactElement, useMemo, Fragment, useRef } from 'react';
 import Layout from 'components/layouts/layout';
-import { NextPageWithLayout } from './_app';
+import { NextPageWithLayout } from '../_app';
 import { useGetProjects } from 'hooks/useProjects';
 import {
   Box,
@@ -10,13 +10,20 @@ import {
   TextField,
   CircularProgress,
 } from '@mui/material';
-import { Text18Weight500 } from 'components/layouts/common/styled/typography-styed';
-import ProductCard from 'components/layouts/common/product-card.tsx/product-card';
+
 import { ProductItemListType } from 'types/product.type';
-import MySelect from 'components/layouts/common/select/my-select';
+
 import commonConstants from 'constants/common.constant';
-import RangeSlider from 'components/layouts/common/slider/my-slider';
+
 import formatUtil from 'utils/format.util';
+import { Text18Weight500 } from 'components/styled/typography-styed';
+import ProductCard from 'components/product-card/product-card';
+import MySelect from 'components/select/my-select';
+import RangeSlider from 'components/slider/my-slider';
+import {
+  StyledLoadingButton,
+  StyledOutlinedLoadingButton,
+} from 'components/styled/common-styled';
 
 const StyledStack = styled(Stack)({
   flexDirection: 'row',
@@ -125,7 +132,8 @@ const Page: NextPageWithLayout = () => {
             onChange={onHandleChangeKeyword}
             defaultValue={keyword}
           />
-          <Button
+          <StyledOutlinedLoadingButton
+            variant='contained'
             onClick={() => {
               // @ts-ignore
               searchRef.current.value = '';
@@ -133,21 +141,27 @@ const Page: NextPageWithLayout = () => {
             }}
           >
             Reset
-          </Button>
+          </StyledOutlinedLoadingButton>
         </Stack>
         {hasPreviousPage && (
           <StyledStack>
-            <Button variant='contained' onClick={() => fetchPreviousPage()}>
+            <StyledLoadingButton
+              variant='contained'
+              onClick={() => fetchPreviousPage()}
+            >
               Load Previous
-            </Button>
+            </StyledLoadingButton>
           </StyledStack>
         )}
         {content}
         {hasNextPage ? (
           <StyledStack>
-            <Button variant='contained' onClick={() => fetchNextPage()}>
+            <StyledLoadingButton
+              variant='contained'
+              onClick={() => fetchNextPage()}
+            >
               Load more
-            </Button>
+            </StyledLoadingButton>
           </StyledStack>
         ) : null}
       </Stack>

@@ -31,6 +31,23 @@ class CustomerService {
       throw error;
     }
   }
+
+  async getProject(id: number): Promise<any> {
+    try {
+      const [response, bcError] = await promiseHelper.handlePromise(
+        backendAPIClient.get(`/projects/${id}`),
+      );
+      if (bcError) {
+        throw new BaseError(
+          HttpStatusCode.BAD_REQUEST,
+          ErrorConstants.GET_PROJECT_ERROR,
+        );
+      }
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default new CustomerService();

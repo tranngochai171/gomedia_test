@@ -4,6 +4,15 @@ const nextConfig = {
   images: {
     domains: ['img.singmap.com'],
   },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/projects',
+        permanent: false,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

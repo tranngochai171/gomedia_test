@@ -6,9 +6,10 @@ import {
   CardMedia,
   Typography,
 } from '@mui/material';
+import { useRouter } from 'next/router';
 import { ProductItemListType } from 'types/product.type';
 import formatUtil from 'utils/format.util';
-import ImageWithFallback from '../image-with-fallback';
+import ImageWithFallback from '../common/image-with-fallback';
 
 type ProductCardProps = ProductItemListType;
 
@@ -22,7 +23,12 @@ const ProductCard = ({
   completion_date,
   min_price,
   max_price,
+  id,
 }: ProductCardProps) => {
+  const router = useRouter();
+  const handleLearnMore = () => {
+    router.push('projects/' + id);
+  };
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia sx={{ height: 140 }}>
@@ -30,8 +36,8 @@ const ProductCard = ({
           <ImageWithFallback
             alt='product image'
             src={photo_url}
-            width={345}
-            height={140}
+            // width={345}
+            // height={140}
           />
         </div>
       </CardMedia>
@@ -60,7 +66,9 @@ const ProductCard = ({
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size='small'>Learn More</Button>
+        <Button onClick={() => handleLearnMore()} size='small'>
+          Learn More
+        </Button>
       </CardActions>
     </Card>
   );

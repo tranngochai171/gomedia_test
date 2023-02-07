@@ -29,8 +29,7 @@ const ImageWithFallback = (
     // eslint-disable-next-line jsx-a11y/alt-text
     <Image
       src={imgSrc || defaultImageSrc}
-      height={10}
-      width={50}
+      fill
       style={{ objectFit: 'contain' }}
       {...rest}
       onError={() => {

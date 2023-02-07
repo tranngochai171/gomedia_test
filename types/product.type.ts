@@ -1,3 +1,9 @@
+export type PDFType = {
+  url: string;
+  title: string;
+  create_at: string;
+};
+
 export type ProductItemListType = {
   id: string;
   photo_url: string;
@@ -10,4 +16,6 @@ export type ProductItemListType = {
   min_price: number;
   max_price: number;
   startCursor?: number;
+  photos: { url: string }[];
+  pdfs: PDFType[];
 };

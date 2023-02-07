@@ -23,4 +23,18 @@ export class ErrorConstants {
       APOLOGIZE_MSG +
       TRY_AGAIN_MSG,
   );
+  static GET_PROJECT_ERROR = new ErrorEntity(
+    101,
+    'An internal error occurred while Getting Project.' +
+      APOLOGIZE_MSG +
+      TRY_AGAIN_MSG,
+  );
+
+  // LEADS Errors
+  static SUBMIT_ENQUIRY_ERROR = new ErrorEntity(
+    200,
+    'An internal error occurred while Submitting Enquiry.' +
+      APOLOGIZE_MSG +
+      TRY_AGAIN_MSG,
+  );
 }
