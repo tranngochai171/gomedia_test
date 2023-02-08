@@ -9,6 +9,7 @@ import {
   PROPERTY_KEY,
   resetAllProperties,
   setProperties,
+  setProperty,
 } from 'redux/slices/products.slice';
 import getQueryKey, { GET_PROJECTS } from 'utils/get-query-key';
 import produce from 'immer';
@@ -122,16 +123,11 @@ export const useGetProjects = () => {
         max_price,
       });
       const response = await axiosHelper.get(`/api/projects?${queryString}`);
-      if (pageParam.forward) {
-        _endRef.current = _endRef.current + limit;
-      } else {
-        _startRef.current = _startRef.current - limit;
-      }
       const data = produce(
         response?.data as { count: number; projects: ProductItemListType[] },
         draft => {
           if (draft?.projects?.length > 0) {
-            let temp = _startRef.current;
+            let temp = startQuery;
             for (let i = 0; i < draft?.projects?.length; i++) {
               draft.projects[i].startCursor = temp++;
             }
@@ -139,6 +135,13 @@ export const useGetProjects = () => {
           return draft;
         },
       );
+
+      if (pageParam.forward) {
+        _endRef.current = _endRef.current + limit;
+      } else {
+        _startRef.current = _startRef.current - limit;
+        dispatch(setProperty({ type: PROPERTY_KEY.START, value: startQuery }));
+      }
 
       return data;
     },

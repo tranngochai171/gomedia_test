@@ -6,10 +6,15 @@ import {
   CardMedia,
   Typography,
 } from '@mui/material';
+import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
 import { ProductItemListType } from 'types/product.type';
+import { setProperty, PROPERTY_KEY } from '../../redux/slices/products.slice';
+import { GET_PROJECTS } from '../../utils/get-query-key';
 import formatUtil from 'utils/format.util';
 import ImageWithFallback from '../common/image-with-fallback';
+import commonConstants from 'constants/common.constant';
 
 type ProductCardProps = ProductItemListType;
 
@@ -24,10 +29,15 @@ const ProductCard = ({
   min_price,
   max_price,
   id,
+  startCursor = commonConstants.PROJECTS_DEFAULT_QUERY_PARAMS.start,
 }: ProductCardProps) => {
   const router = useRouter();
+  // const queryClient = useQueryClient();
+  const dispatch = useDispatch();
   const handleLearnMore = () => {
-    router.push('projects/' + id, undefined, { scroll: false });
+    dispatch(setProperty({ type: PROPERTY_KEY.START, value: startCursor }));
+    router.push('projects/' + id);
+    // queryClient.removeQueries([GET_PROJECTS]);
   };
   return (
     <Card sx={{ maxWidth: 345 }}>

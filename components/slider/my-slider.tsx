@@ -20,21 +20,21 @@ type RangeSliderProps = {
   step?: number;
 };
 
-const useDebounceValue = (value: any, delay = 500) => {
-  const [debouncedValue, setDebouncedValue] = useState(value);
+// const useDebounceValue = (value: any, delay = 500) => {
+//   const [debouncedValue, setDebouncedValue] = useState(value);
 
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedValue(value);
-    }, delay);
+//   useEffect(() => {
+//     const handler = setTimeout(() => {
+//       setDebouncedValue(value);
+//     }, delay);
 
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [value, delay]);
+//     return () => {
+//       clearTimeout(handler);
+//     };
+//   }, [value, delay]);
 
-  return debouncedValue;
-};
+//   return debouncedValue;
+// };
 
 export default function RangeSlider({
   minWidth = 300,
@@ -48,10 +48,10 @@ export default function RangeSlider({
   step = 1,
 }: RangeSliderProps) {
   const [value, setValue] = useState<number[]>([minValue, maxValue]);
-  const onChangeValue = useDebounceValue(value);
-  useEffect(() => {
-    onChange(onChangeValue);
-  }, [onChange, onChangeValue]);
+  // const onChangeValue = useDebounceValue(value);
+  // useEffect(() => {
+  //   onChange(onChangeValue);
+  // }, [onChange, onChangeValue]);
   const handleChange = (event: Event, newValue: number | number[]) => {
     setValue(newValue as number[]);
   };
@@ -69,6 +69,7 @@ export default function RangeSlider({
         min={min}
         max={max}
         onChange={handleChange}
+        onChangeCommitted={() => onChange(value)}
         valueLabelDisplay='auto'
         valueLabelFormat={valuetext}
         marks={marks}
