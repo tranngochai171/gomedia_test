@@ -19,7 +19,8 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 const handleError = (error: any) => {
   // Fallback Error Catch If we don't define onError when using useQuery/useMutate
   toast.error(
-    error?.response?.data?.messageerror?.message ??
+    error?.response?.data?.message ??
+      error?.message ??
       commonConstants.SOMETHING_WENT_WRONG,
   );
 };
